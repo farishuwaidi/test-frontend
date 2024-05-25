@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import { ChangeCircle, Delete } from '@mui/icons-material';
 import './App.css';
+import MuiButton from './components/MuiButton';
+import React,{ useState } from 'react';
+import { Stack } from '@mui/material';
 
 function App() {
+  const [bgColor, setBgColor] = useState<string>('white')
+
+  const handleButtonClick = (color: string) => {
+    setBgColor(color)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{backgroundColor: bgColor}} className='container'>
+        <Stack direction={'column'} spacing={2}>
+          <MuiButton 
+            title='Button Blue' 
+            caption='Change color to Blue' 
+            placement='top-start' 
+            startIcon={<ChangeCircle/>} 
+            color='primary' 
+            size='large' 
+            onClick={()=> handleButtonClick('#0d47a1')}
+          />
+          <MuiButton 
+            title='change color to purple' 
+            placement='left' 
+            endIcon={<ChangeCircle/>} 
+            color='secondary' 
+            onClick={()=> handleButtonClick('indigo')}
+          />          
+          <MuiButton 
+            title='color change to green' 
+            caption='Button Green no icon' 
+            placement='bottom-end' 
+            color='success' 
+            onClick={()=>handleButtonClick('#4caf50')} 
+          />
+          <MuiButton 
+            caption='no tooltip'
+          />
+        </Stack>
+      </div>
     </div>
   );
 }
